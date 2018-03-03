@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 
+import Player from "./components/Player";
+import Episode from "./components/Episode";
 import axios from "axios";
 
 class App extends Component {
@@ -8,9 +10,9 @@ class App extends Component {
     rssUrl: ""
   };
 
-  componentWillMount = async () => {
+  componentWillMount() {
     this.addPodcast("http://feed.syntax.fm/rss");
-  };
+  }
 
   submitPodcastForm = e => {
     e.preventDefault();
@@ -80,6 +82,7 @@ class App extends Component {
           />
           <input type="submit" />
         </form>
+        <Player />
         <PodcastsList podcasts={podcasts} />
       </div>
     );
@@ -95,6 +98,7 @@ const PodcastsList = ({ podcasts }) => (
 const Podcast = ({ podcast }) => (
   <div>
     <h2>{podcast.title}</h2>
+    <EpisodeList episodes={podcast.episodes} />
   </div>
 );
 
@@ -108,9 +112,4 @@ const EpisodeList = ({ episodes }) => (
   </ul>
 );
 
-const Episode = ({ episode }) => (
-  <Fragment>
-    <h3>{episode.title}</h3>
-  </Fragment>
-);
 export default App;
