@@ -6,11 +6,6 @@ import PodcastsPageContainer from "./components/podcasts/PodcastsPageContainer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    podcasts: [],
-    rssUrl: ""
-  };
-
   render() {
     return (
       <Router>
@@ -22,6 +17,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

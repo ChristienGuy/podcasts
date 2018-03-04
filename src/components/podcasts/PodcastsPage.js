@@ -6,7 +6,7 @@ import Player from "../Player";
 const PodcastsPage = ({ podcasts }) => {
   return (
     <div>
-      {/* <form onSubmit={this.submitPodcastForm}>
+      {/* <form onSubmit={submitPodcastForm}>
         <input
           type="text"
           name="url"

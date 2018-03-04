@@ -7,7 +7,7 @@ export const Player = ({ episode }) => {
       {episode && (
         <Fragment>
           <h2>{episode.title}</h2>
-          <audio src={episode.link} controls="true" autoPlay/>
+          <audio src={episode.link} controls="true" autoPlay />
         </Fragment>
       )}
     </div>

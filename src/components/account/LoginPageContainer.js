@@ -5,11 +5,21 @@ import { connect } from "react-redux";
 import { BASE_URL } from "../../constants";
 
 import LoginPage from "./LoginPage";
-import Axios from "axios";
+import axios from "axios";
 
 export class LoginPageContainer extends Component {
   login = async userData => {
-    const loginResponse = Axios.post(`${BASE_URL}/api/authentication/login`);
+    const loginResponse = await axios({
+      method: "POST",
+      url: `${BASE_URL}/api/authentication/login`,
+      data: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log("====================================");
+    console.log(loginResponse);
+    console.log("====================================");
   };
 
   render() {
@@ -20,7 +30,5 @@ export class LoginPageContainer extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {};
 
 export default LoginPageContainer;

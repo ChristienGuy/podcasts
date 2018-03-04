@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PodcastsPage from './PodcastsPage';
+import PodcastsPage from "./PodcastsPage";
 
 import Axios from "axios";
 
 export class PodcastsPageContainer extends Component {
   state = {
     podcasts: []
-  }
+  };
   componentWillMount() {
     this.addPodcast("http://feed.syntax.fm/rss");
   }
@@ -27,18 +27,16 @@ export class PodcastsPageContainer extends Component {
 
   getPodcast = async rssUrl => {
     let podcast = {};
-    await Axios
-      .get(rssUrl, {
-        responseType: "document"
-      })
-      .then(res => {
-        podcast = {
-          title: res.data.querySelector("title").textContent,
-          image: res.data.querySelector("image url").textContent,
-          link: res.data.getElementsByTagName("link")[0].textContent,
-          episodes: this.getEpisodes(res.data)
-        };
-      });
+    await Axios.get(rssUrl, {
+      responseType: "document"
+    }).then(res => {
+      podcast = {
+        title: res.data.querySelector("title").textContent,
+        image: res.data.querySelector("image url").textContent,
+        link: res.data.getElementsByTagName("link")[0].textContent,
+        episodes: this.getEpisodes(res.data)
+      };
+    });
 
     return podcast;
   };
