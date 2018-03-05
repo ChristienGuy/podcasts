@@ -1,24 +1,19 @@
 import React, { Fragment } from "react";
 
+import { Link } from "react-router-dom";
+
 import Episode from "../Episode";
 import Player from "../Player";
 
 const PodcastsPage = ({ podcasts }) => {
   return (
     <div>
-      {/* <form onSubmit={submitPodcastForm}>
-        <input
-          type="text"
-          name="url"
-          value={rssUrl}
-          onChange={e => {
-            this.setState({ rssUrl: e.target.value });
-          }}
-        />
-        <input type="submit" />
-      </form> */}
       <Player />
-      <PodcastsList podcasts={podcasts} />
+      {podcasts.length ? (
+        <PodcastsList podcasts={podcasts} />
+      ) : (
+        <Link to="/podcast/add">No podcasts yet, add one!</Link>
+      )}
     </div>
   );
 };

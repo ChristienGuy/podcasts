@@ -14,12 +14,19 @@ import {
   loginSuccess
 } from "../../actions/authentication";
 
+import { setPodcasts } from "../../actions/podcasts";
 export class LoginPageContainer extends Component {
   state = {
-    redirect: false
+    redirect: false,
+    loginFailed: false
   };
   login = async userData => {
-    const { loginAttempt, loginSuccess, loginFailure } = this.props;
+    const {
+      loginAttempt,
+      loginSuccess,
+      loginFailure,
+      setPodcasts
+    } = this.props;
 
     loginAttempt();
 
@@ -30,25 +37,30 @@ export class LoginPageContainer extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      responseType: 'json'
+      responseType: "json",
+      withCredentials: true
     })
       .then(response => {
         if (response.status === 200) {
           return response.data;
         }
       })
-      .then(json => {
-        if (json) {
-          loginSuccess(json);
+      .then(user => {
+        if (user) {
+          loginSuccess(user);
+          setPodcasts(user.podcasts);
           this.setState({ redirect: true });
         } else {
           loginFailure(new Error("Authentication Failed"));
         }
+      })
+      .catch(err => {
+        this.setState({ loginFailed: true });
       });
   };
 
   render() {
-    const { redirect } = this.state;
+    const { redirect, loginFailed } = this.state;
 
     if (redirect) {
       return <Redirect to="/" />;
@@ -56,6 +68,7 @@ export class LoginPageContainer extends Component {
     return (
       <div>
         <LoginPage login={this.login} />
+        {loginFailed && <p>Something went wrong</p>}
       </div>
     );
   }
@@ -66,7 +79,8 @@ const mapDispatchToProps = dispatch => {
     {
       loginAttempt,
       loginFailure,
-      loginSuccess
+      loginSuccess,
+      setPodcasts
     },
     dispatch
   );
