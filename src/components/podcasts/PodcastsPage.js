@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 
 import { Link } from "react-router-dom";
 
-import Episode from "../Episode";
 import Player from "../Player";
 
 const PodcastsPage = ({ podcasts }) => {
@@ -26,19 +25,11 @@ const PodcastsList = ({ podcasts }) => (
 
 const Podcast = ({ podcast }) => (
   <div>
-    <img style={{ width: 100 }} src={podcast.image} alt="" />
-    <EpisodeList episodes={podcast.episodes} />
+    <Link to={`/podcast/${podcast.title}`}>
+      <img style={{ width: 100 }} src={podcast.image.url} alt="" />
+    </Link>
+    {/* <EpisodeList episodes={podcast.episodes} /> */}
   </div>
-);
-
-const EpisodeList = ({ episodes }) => (
-  <ul>
-    {episodes.map((episode, index) => (
-      <li key={index}>
-        <Episode episode={episode} />
-      </li>
-    ))}
-  </ul>
 );
 
 export default PodcastsPage;

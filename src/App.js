@@ -19,6 +19,7 @@ import LoginPageContainer from "./components/account/LoginPageContainer";
 import RegisterPageContainer from "./components/account/RegisterPageContainer";
 import PodcastsPageContainer from "./components/podcasts/PodcastsPageContainer";
 import AddPodcastPageContainer from "./components/podcasts/AddPodcastPageContainer";
+import EpisodesPageContainer from "./components/podcasts/EpisodesPageContainer";
 
 class App extends Component {
   componentWillMount() {
@@ -26,7 +27,11 @@ class App extends Component {
   }
 
   checkSession = async () => {
-    const { sessionCheckFailure, sessionCheckSuccess, setPodcasts } = this.props;
+    const {
+      sessionCheckFailure,
+      sessionCheckSuccess,
+      setPodcasts
+    } = this.props;
 
     await axios({
       url: `${BASE_URL}/api/authentication/checksession`,
@@ -61,7 +66,8 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={LoginPageContainer} />
             <Route path="/register" component={RegisterPageContainer} />
-            <Route path="/podcast/add" component={AddPodcastPageContainer} />
+            <Route path="/podcasts/add" component={AddPodcastPageContainer} />
+            <Route path="/podcast/:name" component={EpisodesPageContainer} />
             <Route path="/" component={PodcastsPageContainer} />
           </Switch>
         </Fragment>
