@@ -66,7 +66,7 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={LoginPageContainer} />
             <Route path="/register" component={RegisterPageContainer} />
-            <Route path="/podcasts/add" component={AddPodcastPageContainer} />
+            <Route path="/podcast/add" component={AddPodcastPageContainer} />
             <Route path="/podcast/:name" component={EpisodesPageContainer} />
             <Route path="/" component={PodcastsPageContainer} />
           </Switch>
