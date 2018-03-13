@@ -14,6 +14,8 @@ import { BASE_URL } from "./constants";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Player from "./components/shared/Player";
+
 import HeaderContainer from "./components/shared/HeaderContainer";
 import LoginPageContainer from "./components/account/LoginPageContainer";
 import RegisterPageContainer from "./components/account/RegisterPageContainer";
@@ -70,6 +72,7 @@ class App extends Component {
             <Route path="/podcast/:name" component={EpisodesPageContainer} />
             <Route path="/" component={PodcastsPageContainer} />
           </Switch>
+          <Player />
         </Fragment>
       </Router>
     );

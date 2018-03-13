@@ -47,8 +47,8 @@ export class LoginPageContainer extends Component {
       })
       .then(user => {
         if (user) {
-          loginSuccess(user);
           setPodcasts(user.podcasts);
+          loginSuccess(user);
           this.setState({ redirect: true });
         } else {
           loginFailure(new Error("Authentication Failed"));
