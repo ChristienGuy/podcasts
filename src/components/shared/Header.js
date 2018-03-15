@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
+import { AuthenticationState } from "constants/authenticationState";
+import { PodcastState } from "constants/podcastState";
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -23,12 +26,13 @@ const WhiteLink = styled(Link)`
   margin-right: 20px;
 `;
 
-const Header = ({ logout, authentication }) => {
+const Header = ({ logout, authentication, podcastState }) => {
   return (
     <Wrapper>
+      { podcastState === PodcastState.UPDATING && <span>Updating Podcasts</span>}
       <WhiteLink to="/">Home</WhiteLink>
       <WhiteLink to="/podcast/add">Add Podcast</WhiteLink>
-      {authentication.isLoggedIn ? (
+      {authentication.authenticationState === AuthenticationState.LOGGED_IN ? (
         <button onClick={logout}>Logout</button>
       ) : (
         <WhiteLink to="/login">Login</WhiteLink>

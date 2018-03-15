@@ -12,7 +12,7 @@ import Header from "./Header";
 
 class HeaderContainer extends Component {
   logout = async () => {
-    const { logoutFailure, logoutSuccess, setPodcasts } = this.props;
+  const { logoutFailure, logoutSuccess, setPodcasts } = this.props;
 
     await axios({
       url: `${BASE_URL}/api/authentication/logout`,
@@ -33,13 +33,14 @@ class HeaderContainer extends Component {
   };
 
   render() {
-    const { authentication } = this.props;
-    return <Header authentication={authentication} logout={this.logout} />;
+    const { authentication, podcastState } = this.props;
+    return <Header authentication={authentication} podcastState={podcastState} logout={this.logout} />;
   }
 }
 
 const mapStateToProps = state => ({
-  authentication: state.authentication
+  authentication: state.authentication,
+  podcastState: state.podcasts.podcastState
 });
 
 const mapDispatchToProps = dispatch => {

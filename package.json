@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
@@ -14,12 +15,13 @@
     "styled-components": "^3.1.6"
   },
   "scripts": {
-    "start": "PORT=3000 react-scripts start",
+    "start": "NODE_PATH=src PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "flow-bin": "^0.67.1",
     "redux-devtools": "^3.4.1"
   }
 }

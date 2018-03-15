@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { SET_PLAYING_EPISODE } from "../actions";
+import { format } from "date-fns";
+import { SET_PLAYING_EPISODE } from "actions";
+
 
 const Episode = ({ episode, setPlayingEpisode }) => (
   <Fragment>
@@ -9,10 +11,18 @@ const Episode = ({ episode, setPlayingEpisode }) => (
         setPlayingEpisode(episode);
       }}
     >
-      {episode.title}
+      <Date dateString={episode.pubDate} /> - {episode.title}
     </h3>
   </Fragment>
 );
+
+const Date = ({ dateString }) => {
+  return (
+    <div>
+      { format(dateString, "MMM - d") }
+    </div>
+  )
+};
 
 const mapStateToProps = ({ playingEpisode }) => {
   return {

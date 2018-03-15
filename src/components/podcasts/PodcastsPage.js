@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 
 import { Link } from "react-router-dom";
 
-const PodcastsPage = ({ podcasts }) => {
+const PodcastsPage = ({ podcasts, updatePodcasts }) => {
   return (
     <div>
+      <button onClick={updatePodcasts}>Update</button>
       {podcasts.length ? (
         <PodcastsList podcasts={podcasts} />
       ) : (

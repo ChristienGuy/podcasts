@@ -33,7 +33,8 @@ class EpisodesPageContainer extends Component {
 
   render() {
     const { podcast } = this.state;
-    return <EpisodesPage episodes={podcast.episodes} />;
+    const sortedEpisodes = podcast.episodes.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
+    return <EpisodesPage episodes={sortedEpisodes} />;
   }
 }
 

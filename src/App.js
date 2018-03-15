@@ -5,10 +5,13 @@ import axios from "axios";
 
 import {
   sessionCheckFailure,
-  sessionCheckSuccess
+  sessionCheckSuccess,
+  sessionCheckAttempt
 } from "./actions/authentication";
 
-import { setPodcasts } from "./actions/podcasts";
+import { AuthenticationState } from "constants/authenticationState";
+
+import { setPodcasts, updatePodcastsAttempt } from "./actions/podcasts";
 
 import { BASE_URL } from "./constants";
 
@@ -28,12 +31,35 @@ class App extends Component {
     this.checkSession();
   }
 
+  updatePodcasts = e => {
+    const { setPodcasts, updatePodcastsAttempt } = this.props;
+
+    updatePodcastsAttempt();
+    axios({
+      method: "GET",
+      url: `${BASE_URL}/api/podcast/update`,
+      withCredentials: true
+    })
+      .then(response => {
+        if (response.status === 200) {
+          return response.data;
+        }
+        return null;
+      })
+      .then(podcasts => {
+        setPodcasts(podcasts);
+      });
+  };
+
   checkSession = async () => {
     const {
       sessionCheckFailure,
       sessionCheckSuccess,
+      sessionCheckAttempt,
       setPodcasts
     } = this.props;
+
+    sessionCheckAttempt()
 
     await axios({
       url: `${BASE_URL}/api/authentication/checksession`,
@@ -51,6 +77,8 @@ class App extends Component {
         if (json.username) {
           sessionCheckSuccess(json);
           setPodcasts(json.podcasts);
+          // session is checked succesfully, go check for updates to podcasts
+          this.updatePodcasts()
         } else {
           sessionCheckFailure();
         }
@@ -65,14 +93,26 @@ class App extends Component {
       <Router>
         <Fragment>
           <HeaderContainer />
-          <Switch>
-            <Route path="/login" component={LoginPageContainer} />
-            <Route path="/register" component={RegisterPageContainer} />
-            <Route path="/podcast/add" component={AddPodcastPageContainer} />
-            <Route path="/podcast/:name" component={EpisodesPageContainer} />
-            <Route path="/" component={PodcastsPageContainer} />
-          </Switch>
-          <Player />
+          {this.props.authState === AuthenticationState.CHECKING_SESSION  ? (
+            <p>Loading...</p>
+          ) : (
+            <Fragment>
+              <Switch>
+                <Route path="/login" component={LoginPageContainer} />
+                <Route path="/register" component={RegisterPageContainer} />
+                <Route
+                  path="/podcast/add"
+                  component={AddPodcastPageContainer}
+                />
+                <Route
+                  path="/podcast/:name"
+                  component={EpisodesPageContainer}
+                />
+                <Route path="/" component={PodcastsPageContainer} />
+              </Switch>
+              <Player />
+            </Fragment>
+          )}
         </Fragment>
       </Router>
     );
@@ -82,12 +122,20 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      sessionCheckAttempt,
       sessionCheckFailure,
       sessionCheckSuccess,
-      setPodcasts
+      setPodcasts,
+      updatePodcastsAttempt
     },
     dispatch
   );
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = state => {
+  return {
+    authState: state.authentication.authenticationState
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
