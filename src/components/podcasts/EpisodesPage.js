@@ -1,5 +1,5 @@
 import React from 'react';
-import Episode from "components/Episode";
+import Episode from "../Episode";
 
 
 const EpisodesPage = ({episodes}) => {

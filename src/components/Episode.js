@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { format } from "date-fns";
-import { SET_PLAYING_EPISODE } from "actions";
+import { SET_PLAYING_EPISODE } from "../actions";
 
 
 const Episode = ({ episode, setPlayingEpisode }) => (

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { AuthenticationState } from "constants/authenticationState";
-import { PodcastState } from "constants/podcastState";
+import { AuthenticationState } from "../../constants/authenticationState";
+import { PodcastState } from "../../constants/podcastState";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,19 +27,32 @@ const WhiteLink = styled(Link)`
   margin-right: 20px;
 `;
 
-const Header = ({ logout, authentication, podcastState }) => {
+export const Header = ({ logout, authentication, podcastState }) => {
   return (
     <Wrapper>
-      { podcastState === PodcastState.UPDATING && <span>Updating Podcasts</span>}
+      { podcastState === PodcastState.UPDATING && <span>Updating Podcasts</span> }
       <WhiteLink to="/">Home</WhiteLink>
-      <WhiteLink to="/podcast/add">Add Podcast</WhiteLink>
       {authentication.authenticationState === AuthenticationState.LOGGED_IN ? (
-        <button onClick={logout}>Logout</button>
+        <Fragment>
+          <WhiteLink to="/podcast/add">Add Podcast</WhiteLink>
+          <LogoutButton onLogout={logout} />
+        </Fragment>
       ) : (
         <WhiteLink to="/login">Login</WhiteLink>
       )}
     </Wrapper>
   );
 };
+
+export const LogoutButton = ({onLogout}) => (
+  <button onClick={onLogout}>Logout</button>
+)
+LogoutButton.displayName = "LogoutButton";
+
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  authentication: PropTypes.object,
+  podcastState: PropTypes.string
+}
 
 export default Header;

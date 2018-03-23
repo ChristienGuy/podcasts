@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correct routes when authState is 'LOGGED_IN' 1`] = `
+<BrowserRouter>
+  <React.Fragment>
+    <Connect(HeaderContainer) />
+    <React.Fragment>
+      <Switch>
+        <Route
+          component={[Function]}
+          path="/login"
+        />
+        <Route
+          component={[Function]}
+          path="/register"
+        />
+        <Route
+          component={[Function]}
+          path="/podcast/add"
+        />
+        <Route
+          component={[Function]}
+          path="/podcast/:name"
+        />
+        <Route
+          component={[Function]}
+          path="/"
+        />
+      </Switch>
+      <Connect(Component) />
+    </React.Fragment>
+  </React.Fragment>
+</BrowserRouter>
+`;
+
+exports[`renders loading when authstate is 'CHECKING_SESSION' 1`] = `
+<BrowserRouter>
+  <React.Fragment>
+    <Connect(HeaderContainer) />
+    <p>
+      Loading...
+    </p>
+  </React.Fragment>
+</BrowserRouter>
+`;
+
+exports[`renders without crashing 1`] = `
+<BrowserRouter>
+  <React.Fragment>
+    <Connect(HeaderContainer) />
+  </React.Fragment>
+</BrowserRouter>
+`;

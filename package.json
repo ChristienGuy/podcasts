@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
@@ -21,7 +22,17 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
     "flow-bin": "^0.67.1",
+    "jest-enzyme": "^6.0.0",
+    "jest-styled-components": "^5.0.0",
     "redux-devtools": "^3.4.1"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

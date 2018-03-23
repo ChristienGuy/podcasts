@@ -9,7 +9,7 @@ import {
   sessionCheckAttempt
 } from "./actions/authentication";
 
-import { AuthenticationState } from "constants/authenticationState";
+import { AuthenticationState } from "./constants/authenticationState";
 
 import { setPodcasts, updatePodcastsAttempt } from "./actions/podcasts";
 
@@ -26,7 +26,7 @@ import PodcastsPageContainer from "./components/podcasts/PodcastsPageContainer";
 import AddPodcastPageContainer from "./components/podcasts/AddPodcastPageContainer";
 import EpisodesPageContainer from "./components/podcasts/EpisodesPageContainer";
 
-class App extends Component {
+export class App extends Component {
   componentWillMount() {
     this.checkSession();
   }
@@ -93,9 +93,10 @@ class App extends Component {
       <Router>
         <Fragment>
           <HeaderContainer />
-          {this.props.authState === AuthenticationState.CHECKING_SESSION  ? (
+          {this.props.authState === AuthenticationState.CHECKING_SESSION &&
             <p>Loading...</p>
-          ) : (
+          }
+          {this.props.authState === AuthenticationState.LOGGED_IN && 
             <Fragment>
               <Switch>
                 <Route path="/login" component={LoginPageContainer} />
@@ -112,7 +113,15 @@ class App extends Component {
               </Switch>
               <Player />
             </Fragment>
-          )}
+          }
+          {this.props.authState === AuthenticationState.NOT_AUTHENTICATED && 
+            <Fragment>
+              <Switch>
+                <Route path="/" component={LoginPageContainer} />
+                <Route path="/login" component={LoginPageContainer} />
+              </Switch>
+            </Fragment>
+          }
         </Fragment>
       </Router>
     );

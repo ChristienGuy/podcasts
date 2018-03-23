@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render logout button when the user is logged in 1`] = `
+<styled.div>
+  <Styled(Link)
+    to="/"
+  >
+    Home
+  </Styled(Link)>
+  <React.Fragment>
+    <Styled(Link)
+      to="/podcast/add"
+    >
+      Add Podcast
+    </Styled(Link)>
+    <LogoutButton
+      onLogout={[Function]}
+    />
+  </React.Fragment>
+</styled.div>
+`;
+
+exports[`renders without crashing 1`] = `
+<styled.div>
+  <Styled(Link)
+    to="/"
+  >
+    Home
+  </Styled(Link)>
+  <Styled(Link)
+    to="/login"
+  >
+    Login
+  </Styled(Link)>
+</styled.div>
+`;
+
+exports[`should show 'updating podcasts' when podcastState === UPDATING 1`] = `
+<styled.div>
+  <Styled(Link)
+    to="/"
+  >
+    Home
+  </Styled(Link)>
+  <Styled(Link)
+    to="/login"
+  >
+    Login
+  </Styled(Link)>
+</styled.div>
+`;

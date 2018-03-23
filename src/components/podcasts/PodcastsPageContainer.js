@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setPodcasts, updatePodcastsAttempt } from "actions/podcasts";
+import { setPodcasts, updatePodcastsAttempt } from "../../actions/podcasts";
 import axios from "axios";
 
-import PodcastsPage from "components/podcasts/PodcastsPage";
+import PodcastsPage from "./PodcastsPage";
 
-import { BASE_URL } from "constants/index";
+import { BASE_URL } from "../../constants/index";
 
 export class PodcastsPageContainer extends Component<{}, {}> {
   updatePodcasts = e => {
